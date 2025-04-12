@@ -1,0 +1,5 @@
+username: tom11
+password: 123456
+server:
+  ip: 127.0.0.1
+  port: 8080

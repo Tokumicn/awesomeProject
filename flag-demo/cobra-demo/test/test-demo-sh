@@ -1,0 +1,26 @@
+================= word =================
+$ go run main.go word -s=eddycjy -m=1  // 转大写
+输出结果: EDDYCJY
+$ go run main.go word -s=EDDYCJY -m=2  // 转小写
+输出结果: eddycjy
+$ go run main.go word -s=eddycjy -m=3  // 下划线转大写驼峰
+输出结果: Eddycjy
+$ go run main.go word -s=EDDYCJY -m=4 // 下划线转小写驼峰
+输出结果: eDDYCJY
+$ go run main.go word -s=EddyCjy -m=5 // 驼峰转下划线
+输出结果: eddy_cjy
+
+
+
+================= time =================
+# 获取当前时间
+$ go run main.go time now
+输出结果: 2029-09-04 12:02:33, 1883188953
+
+# 推算时间 加
+$ go run main.go time calc -c="2029-09-04 12:02:33" -d=5m
+输出结果: 2029-09-04 12:07:33, 1883218053
+
+# 推算时间 减
+$ go run main.go time calc -c="2029-09-04 12:02:33" -d=-2h
+输出结果: 2029-09-04 10:02:33, 1883210553
