@@ -3,8 +3,8 @@ module ai-demo
 go 1.23.0
 
 require (
-	github.com/ThinkInAIXYZ/go-mcp v0.1.0
-	github.com/mark3labs/mcp-go v0.18.0
+	github.com/ThinkInAIXYZ/go-mcp v0.1.6
+	github.com/mark3labs/mcp-go v0.20.0
 	github.com/tmc/langchaingo v0.1.13
 )
 
