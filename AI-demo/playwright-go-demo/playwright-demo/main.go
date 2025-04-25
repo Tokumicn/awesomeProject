@@ -9,6 +9,14 @@ import (
 	"github.com/playwright-community/playwright-go"
 )
 
+func init() {
+	// 安装依赖
+	err := playwright.Install()
+	if err != nil {
+		panic(err)
+	}
+}
+
 func main() {
 	// 初始化Playwright
 	pw, err := playwright.Run()
