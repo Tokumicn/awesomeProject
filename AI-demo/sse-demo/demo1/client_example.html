@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SSE Client Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .output {
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            min-height: 200px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            margin-right: 10px;
+        }
+        .message {
+            border-bottom: 1px solid #eee;
+            padding: 5px 0;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>SSE 客户端示例</h1>
+    <p>这个页面演示了如何从外部网页连接到 SSE 服务器</p>
+
+    <div class="container">
+        <h2>基础 SSE 连接</h2>
+        <div>
+            <label for="serverUrl">服务器地址:</label>
+            <input type="text" id="serverUrl" value="http://localhost:8080/stream">
+            <button onclick="connectToBasicSSE()">连接</button>
+            <button onclick="disconnectSSE('basic')">断开</button>
+        </div>
+        <div class="output" id="basicOutput"></div>
+    </div>
+
+    <div class="container">
+        <h2>高级 SSE 连接</h2>
+        <div>
+            <label for="advancedServerUrl">服务器地址:</label>
+            <input type="text" id="advancedServerUrl" value="http://localhost:8080/advanced-stream">
+            <input type="text" id="textInput" placeholder="输入要处理的文本" value="示例文本">
+            <button onclick="connectToAdvancedSSE()">连接</button>
+            <button onclick="disconnectSSE('advanced')">断开</button>
+        </div>
+        <div class="output" id="advancedOutput"></div>
+    </div>
+
+    <div class="container">
+        <h2>代码示例</h2>
+        <h3>基本 SSE 连接</h3>
+        <pre>
+const eventSource = new EventSource('http://localhost:8080/stream');
+
+eventSource.addEventListener('message', function(e) {
+    console.log('接收到消息:', e.data);
+});
+
+eventSource.onerror = function(e) {
+    console.log('连接错误:', e);
+    eventSource.close();
+};</pre>
+
+        <h3>高级 SSE 连接 (带参数)</h3>
+        <pre>
+const text = '要处理的文本';
+const eventSource = new EventSource(
+    `http://localhost:8080/advanced-stream?text=${encodeURIComponent(text)}`
+);
+
+eventSource.addEventListener('message', function(e) {
+    console.log('接收到消息:', e.data);
+});
+
+eventSource.addEventListener('done', function(e) {
+    console.log('处理完成:', e.data);
+    eventSource.close();
+});
+
+eventSource.onerror = function(e) {
+    console.log('连接错误:', e);
+    eventSource.close();
+};</pre>
+    </div>
+
+    <script>
+        let basicEventSource = null;
+        let advancedEventSource = null;
+
+        function connectToBasicSSE() {
+            // 断开现有连接 (如果有)
+            disconnectSSE('basic');
+
+            const serverUrl = document.getElementById('serverUrl').value;
+            const outputDiv = document.getElementById('basicOutput');
+            
+            outputDiv.innerHTML = '<div>正在连接到 ' + serverUrl + '...</div>';
+            
+            try {
+                basicEventSource = new EventSource(serverUrl);
+                
+                basicEventSource.addEventListener('message', function(e) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = e.data;
+                    outputDiv.appendChild(messageDiv);
+                });
+
+                basicEventSource.addEventListener('step', function(e) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = e.data;
+                    console.log("[step]  data: ", e.data)
+                    outputDiv.appendChild(messageDiv);
+                });
+                
+                basicEventSource.addEventListener('done', function(e) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = '完成: ' + e.data;
+                    outputDiv.appendChild(messageDiv);
+                });
+                
+                basicEventSource.onerror = function(e) {
+                    console.log('SSE 错误', e);
+                    outputDiv.innerHTML += '<div style="color: red;">连接错误或已关闭</div>';
+                    basicEventSource.close();
+                    basicEventSource = null;
+                };
+            } catch (error) {
+                outputDiv.innerHTML += '<div style="color: red;">连接失败: ' + error.message + '</div>';
+            }
+        }
+        
+        function connectToAdvancedSSE() {
+            // 断开现有连接 (如果有)
+            disconnectSSE('advanced');
+            
+            const serverUrl = document.getElementById('advancedServerUrl').value;
+            const textInput = document.getElementById('textInput').value;
+            const outputDiv = document.getElementById('advancedOutput');
+            
+            const fullUrl = `${serverUrl}?text=${encodeURIComponent(textInput)}`;
+            outputDiv.innerHTML = '<div>正在连接到 ' + fullUrl + '...</div>';
+            
+            try {
+                advancedEventSource = new EventSource(fullUrl);
+                
+                advancedEventSource.addEventListener('message', function(e) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = "message: " + e.data;
+                    outputDiv.appendChild(messageDiv);
+                });
+
+                advancedEventSource.addEventListener('step', function(e) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = "step: " + e.data;
+                    outputDiv.appendChild(messageDiv);
+                });
+                
+                advancedEventSource.addEventListener('done', function(e) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.innerHTML = '<strong>✅ ' + e.data + '</strong>';
+                    outputDiv.appendChild(messageDiv);
+                    
+                    // 自动关闭连接
+                    setTimeout(() => {
+                        advancedEventSource.close();
+                        advancedEventSource = null;
+                    }, 500);
+                });
+                
+                advancedEventSource.onerror = function(e) {
+                    console.log('SSE 错误', e);
+                    outputDiv.innerHTML += '<div style="color: red;">连接错误或已关闭</div>';
+                    advancedEventSource.close();
+                    advancedEventSource = null;
+                };
+            } catch (error) {
+                outputDiv.innerHTML += '<div style="color: red;">连接失败: ' + error.message + '</div>';
+            }
+        }
+        
+        function disconnectSSE(type) {
+            if (type === 'basic' && basicEventSource) {
+                basicEventSource.close();
+                basicEventSource = null;
+                document.getElementById('basicOutput').innerHTML += '<div>已断开连接</div>';
+            } else if (type === 'advanced' && advancedEventSource) {
+                advancedEventSource.close();
+                advancedEventSource = null;
+                document.getElementById('advancedOutput').innerHTML += '<div>已断开连接</div>';
+            }
+        }
+    </script>
+</body>
+</html> 
