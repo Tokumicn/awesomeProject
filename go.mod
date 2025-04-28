@@ -5,6 +5,7 @@ go 1.23
 toolchain go1.23.0
 
 require (
+	github.com/bits-and-blooms/bloom/v3 v3.7.0
 	github.com/chromedp/chromedp v0.9.2
 	github.com/coder/websocket v1.8.12
 	github.com/fsnotify/fsnotify v1.7.0
@@ -54,6 +55,7 @@ require (
 	github.com/antchfx/xpath v1.1.8 // indirect
 	github.com/apache/thrift v0.20.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/bits-and-blooms/bitset v1.10.0 // indirect
 	github.com/bytedance/sonic v1.13.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cenk/backoff v2.2.1+incompatible // indirect
