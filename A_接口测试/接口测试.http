@@ -1,0 +1,12 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=GoLand
+
+###
+
+
+# curl --location --request POST 'http://localhost:8080/playwright/version'
+POST http://localhost:8080/playwright/version
+
+###
+
