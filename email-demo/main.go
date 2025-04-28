@@ -29,7 +29,7 @@ func main() {
 		panic(err)
 	}
 	// 发送邮件
-	sendEmail("461694377@qq.com", "Welcome to Our Service", body.String())
+	sendEmail("{{qqmail}}", "Welcome to Our Service", body.String())
 }
 
 // 发送邮件的函数
@@ -39,7 +39,7 @@ func sendEmail(to, subject, body string) {
 	m.SetHeader("To", to)
 	m.SetHeader("Subject", subject)
 	m.SetBody("text/html", body) // 发送 HTML 邮件
-	d := gomail.NewDialer("smtp.qq.com", 465, "461694377@qq.com", "8bvjiefvpsseebhee77")
+	d := gomail.NewDialer("smtp.qq.com", 465, "{{qqmail}}", "{{authcode}}")
 	if err := d.DialAndSend(m); err != nil {
 		fmt.Println("Error sending email:", err)
 	} else {
