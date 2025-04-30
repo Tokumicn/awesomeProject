@@ -40,8 +40,13 @@ func getEncouragementPrompt() ([]*schema.Message, error) {
 	return messages, nil
 }
 
+type ChatHistory struct {
+	UserA   string `json:"usr_a"`
+	SystemQ string `json:"system_q"`
+}
+
 // 对话重写
-func getQueryRewritePrompt(query string) ([]*schema.Message, error) {
+func getQueryRewritePrompt(query string, histories []ChatHistory) ([]*schema.Message, error) {
 	// 创建模板，使用 FString 格式
 	template := prompt.FromMessages(schema.FString,
 		// 系统消息模板
@@ -54,17 +59,25 @@ func getQueryRewritePrompt(query string) ([]*schema.Message, error) {
 		schema.UserMessage("问题: {question}"),
 	)
 
+	// 提供历史信息
+	his := []*schema.Message{}
+	for _, h := range histories {
+		his = append(his, schema.UserMessage(h.UserA))
+		his = append(his, schema.UserMessage(h.SystemQ))
+	}
+
 	// 使用模板生成消息
 	messages, err := template.Format(context.Background(), map[string]any{
 		"role":     "用户问题重写人员",
-		"question": "第三呢？",
+		"question": query,
 		// 对话历史（这个例子里模拟两轮对话历史）
-		"chat_history": []*schema.Message{
-			schema.UserMessage("第一名奖品是什么？"),
-			schema.AssistantMessage("第一名奖品是第一名", nil),
-			schema.UserMessage("第二名呢？"),
-			schema.AssistantMessage("奖品是第二名", nil),
-		},
+		//"chat_history": []*schema.Message{
+		//	schema.UserMessage("第一名奖品是什么？"),
+		//	schema.AssistantMessage("第一名奖品是第一名", nil),
+		//	schema.UserMessage("第二名呢？"),
+		//	schema.AssistantMessage("奖品是第二名", nil),
+		//},
+		"chat_history": his,
 	})
 	if err != nil {
 		return nil, err

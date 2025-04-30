@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"fmt"
 	"github.com/cloudwego/eino-ext/components/model/ollama"
 	"github.com/cloudwego/eino/schema"
 	"io"
 	"log"
+	"os"
 )
 
 func main() {
@@ -23,10 +25,32 @@ func main() {
 	// 程序员鼓励师
 	// messages, err := getEncouragementPrompt()
 
-	messages, err := getQueryRewritePrompt("")
+	for {
+		fmt.Print("输入问题Query: ")
 
-	result, err := chatModel.Generate(ctx, messages)
-	fmt.Println(result)
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+
+		input := scanner.Text()
+		if input == "exit" || input == "quit" {
+			break
+		}
+
+		messages, err := getQueryRewritePrompt(input, []ChatHistory{
+			{
+				UserA:   "第一名奖品是什么？",
+				SystemQ: "第一名奖品是第一名",
+			},
+		})
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+
+		result, err := chatModel.Generate(ctx, messages)
+		fmt.Println(result)
+
+	}
 
 	// 流式结果
 	//streamResult, err := chatModel.Stream(ctx, messages)

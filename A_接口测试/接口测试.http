@@ -28,7 +28,7 @@ POST http://localhost:8080/playwright/version
 #    "max_tokens": 100
 #  }
 #}'
-POST http://localhost:11434/api/chat
+POST http://8.140.229.56:11434/api/chat
 Content-Type: application/json
 
 {
@@ -47,4 +47,41 @@ Content-Type: application/json
 }
 
 ###
+
+# curl --location --request GET 'http://localhost:11434/api/tags'
+#--header 'Content-Type: application/json'
+#--data '{
+#  "model": "<model-name>",
+#  "messages": [
+#    {
+#      "role": "user",
+#      "content": "<input-text>"
+#    }
+#  ],
+#  "stream": false,
+#  "options": {
+#    "temperature": 0.7,
+#    "max_tokens": 100
+#  }
+#}'
+GET http://8.140.229.56:11434/api/tags
+Content-Type: application/json
+
+{
+  "model": "<model-name>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<input-text>"
+    }
+  ],
+  "stream": false,
+  "options": {
+    "temperature": 0.7,
+    "max_tokens": 100
+  }
+}
+
+###
+
 
