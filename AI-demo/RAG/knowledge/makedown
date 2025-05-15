@@ -1,0 +1,12 @@
+
+
+Category // 分类
+    id - Knowledge // 知识点
+
+Knowledge // 知识点
+    id - Answer // 标准回答
+    id - Similar // 相似问题
+
+KnowledgeBase // 资料库
+    id - KnowledgeBaseIntention // 资料库意图
+    id - KnowledgeBaseSlot // 资料库槽位

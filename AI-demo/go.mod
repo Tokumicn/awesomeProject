@@ -6,12 +6,15 @@ toolchain go1.24.1
 
 require (
 	github.com/ThinkInAIXYZ/go-mcp v0.1.6
+	github.com/cloudwego/eino v0.3.27
 	github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250428094815-70b5e0581a33
 	github.com/mark3labs/mcp-go v0.20.0
 	github.com/playwright-community/playwright-go v0.5101.0
 	github.com/tmc/langchaingo v0.1.13
 	github.com/tsenart/vegeta/v12 v12.12.0
 	gocv.io/x/gocv v0.41.0
+	gorm.io/driver/postgres v1.5.11
+	gorm.io/gorm v1.26.1
 )
 
 require (
@@ -23,7 +26,6 @@ require (
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cenkalti/backoff v2.2.1+incompatible // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
-	github.com/cloudwego/eino v0.3.27 // indirect
 	github.com/deckarep/golang-set/v2 v2.8.0 // indirect
 	github.com/dlclark/regexp2 v1.11.4 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -38,6 +40,12 @@ require (
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/influxdata/tdigest v0.0.1 // indirect
 	github.com/invopop/yaml v0.1.0 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
+	github.com/jackc/pgx/v5 v5.5.5 // indirect
+	github.com/jackc/puddle/v2 v2.2.1 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.17.6 // indirect
@@ -70,6 +78,7 @@ require (
 	gitlab.com/golang-commonmark/mdurl v0.0.0-20191124015652-932350d1cb84 // indirect
 	gitlab.com/golang-commonmark/puny v0.0.0-20191124015043-9f83538fa04f // indirect
 	golang.org/x/arch v0.11.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
 	golang.org/x/net v0.27.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
