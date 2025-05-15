@@ -14,15 +14,22 @@ import (
 	"gold/playwright-gold/zhoushengsheng"
 	"log/slog"
 	"os"
+	"path/filepath"
 	"time"
 )
 
 var imagePath string
 
 func init() {
-	imagePath = fmt.Sprintf("./images/%s", time.Now().Format(time.DateOnly))
+	exePath, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	binDir := filepath.Dir(exePath)
+	fmt.Println("[GOLD] bin work dir: ", binDir)
+	imagePath = fmt.Sprintf("%s/images/%s", binDir, time.Now().Format(time.DateOnly))
 	// 文件夹不存在则创建
-	err := os.MkdirAll(imagePath, os.ModePerm)
+	err = os.MkdirAll(imagePath, os.ModePerm)
 	if err != nil {
 		panic(err)
 	}
