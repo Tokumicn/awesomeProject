@@ -9,6 +9,7 @@ require (
 	github.com/cloudwego/eino v0.3.27
 	github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250428094815-70b5e0581a33
 	github.com/mark3labs/mcp-go v0.20.0
+	github.com/pgvector/pgvector-go v0.1.1
 	github.com/playwright-community/playwright-go v0.5101.0
 	github.com/tmc/langchaingo v0.1.13
 	github.com/tsenart/vegeta/v12 v12.12.0
