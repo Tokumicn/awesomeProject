@@ -1,5 +1,7 @@
 github.com/AssemblyAI/assemblyai-go-sdk v1.3.0 h1:AtOVgGxUycvK4P4ypP+1ZupecvFgnfH+Jsum0o5ILoU=
 github.com/AssemblyAI/assemblyai-go-sdk v1.3.0/go.mod h1:H0naZbvpIW49cDA5ZZ/gggeXqi7ojSGB1mqshRk6kNE=
+github.com/Hank-Kuo/go-bert-tokenizer v1.0.0 h1:NJPbejkZNjP0ZFci25pYD5jWj1DDHzv30ZQ0p4KSC3U=
+github.com/Hank-Kuo/go-bert-tokenizer v1.0.0/go.mod h1:4TYysrVVbvecDe+YdsV+NbdypxCl19gUk6aJmSe2oh4=
 github.com/PuerkitoBio/goquery v1.8.1 h1:uQxhNlArOIdbrH1tr0UXwdVFgDcZDrZVdcpygAcwmWM=
 github.com/PuerkitoBio/goquery v1.8.1/go.mod h1:Q8ICL1kNUJ2sXGoAhPGUdYDJvgQgHzJsnnd3H7Ho5jQ=
 github.com/ThinkInAIXYZ/go-mcp v0.1.6 h1:CmFMo4NiwnnvHn9rotS4JNKP7L6ZzRchbUi1NOzOSfM=
@@ -284,6 +286,8 @@ github.com/vmihailenco/tagparser v0.1.2 h1:gnjoVuB/kljJ5wICEEOpx98oXMWPLj22G67Vb
 github.com/vmihailenco/tagparser v0.1.2/go.mod h1:OeAg3pn3UbLjkWt+rN9oFYB6u/cQgqMEUPoW2WPyhdI=
 github.com/vmihailenco/tagparser/v2 v2.0.0 h1:y09buUbR+b5aycVFQs/g70pqKVZNBmxwAhO7/IwNM9g=
 github.com/vmihailenco/tagparser/v2 v2.0.0/go.mod h1:Wri+At7QHww0WTrCBeu4J6bNtoV6mEfg5OIWRZA9qds=
+github.com/wangbin/jiebago v0.3.2 h1:reQKp0xTXWFK7eQ19L6Ofq5xODSR2hcam55qcdCCNpw=
+github.com/wangbin/jiebago v0.3.2/go.mod h1:PAqQLauF0qAzy/63jBvO7Goh0oYBq1ocr0OXHLlujwQ=
 github.com/x-cray/logrus-prefixed-formatter v0.5.2 h1:00txxvfBM9muc0jiLIEAkAcIMJzfthRT6usrui8uGmg=
 github.com/x-cray/logrus-prefixed-formatter v0.5.2/go.mod h1:2duySbKsL6M18s5GU7VPsoEPHyzalCE06qoARUCeBBE=
 github.com/yargevad/filepathx v1.0.0 h1:SYcT+N3tYGi+NvazubCNlvgIPbzAk7i7y2dwg3I5FYc=

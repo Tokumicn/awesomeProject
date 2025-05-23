@@ -5,6 +5,7 @@ go 1.23.4
 toolchain go1.24.1
 
 require (
+	github.com/Hank-Kuo/go-bert-tokenizer v1.0.0
 	github.com/ThinkInAIXYZ/go-mcp v0.1.6
 	github.com/cloudwego/eino v0.3.27
 	github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250428094815-70b5e0581a33
@@ -13,7 +14,9 @@ require (
 	github.com/playwright-community/playwright-go v0.5101.0
 	github.com/tmc/langchaingo v0.1.13
 	github.com/tsenart/vegeta/v12 v12.12.0
+	github.com/wangbin/jiebago v0.3.2
 	gocv.io/x/gocv v0.41.0
+	golang.org/x/net v0.27.0
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/gorm v1.26.1
 )
@@ -81,7 +84,6 @@ require (
 	golang.org/x/arch v0.11.0 // indirect
 	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
-	golang.org/x/net v0.27.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect

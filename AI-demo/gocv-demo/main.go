@@ -23,7 +23,7 @@ func main() {
 // 如果发现任何人脸，它会在每个人脸周围绘制一个绿色矩形，然后在输出窗口中显示视频：
 // How to run:
 // facedetect [camera ID] [classifier XML file]
-// go run ./cmd/facedetect/main.go 0 data/haarcascade_frontalface_default.xml
+// go run ./cmd/facedetect/get_my_ip.go 0 data/haarcascade_frontalface_default.xml
 func showFace() {
 	if len(os.Args) < 3 {
 		fmt.Println("How to run:\n\tfacedetect [camera ID] [classifier XML file]")

@@ -5,11 +5,14 @@ go 1.23
 toolchain go1.23.0
 
 require (
+	github.com/PuerkitoBio/goquery v1.5.1
 	github.com/bits-and-blooms/bloom/v3 v3.7.0
 	github.com/chromedp/chromedp v0.9.2
 	github.com/coder/websocket v1.8.12
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/gin-gonic/gin v1.10.0
+	github.com/go-redis/redis/v8 v8.11.5
+	github.com/go-rod/rod v0.116.2
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/golang-jwt/jwt/v4 v4.2.0
 	github.com/google/wire v0.6.0
@@ -34,6 +37,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/xuri/excelize/v2 v2.9.0
 	golang.org/x/exp v0.0.0-20240506185415-9bf2ced13842
+	golang.org/x/net v0.30.0
 	golang.org/x/sync v0.8.0
 	golang.org/x/text v0.19.0
 	google.golang.org/grpc v1.62.1
@@ -45,7 +49,6 @@ require (
 )
 
 require (
-	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/akutz/memconn v0.1.0 // indirect
 	github.com/alitto/pond v1.8.3 // indirect
@@ -66,6 +69,7 @@ require (
 	github.com/cloudwego/base64x v0.1.5 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dgryski/go-jump v0.0.0-20211018200510-ba001c3ffce0 // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/edwingeng/doublejump v1.0.1 // indirect
 	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a // indirect
 	github.com/fatih/color v1.17.0 // indirect
@@ -161,13 +165,17 @@ require (
 	github.com/xtaci/kcp-go v5.4.20+incompatible // indirect
 	github.com/xuri/efp v0.0.0-20240408161823-9ad904a10d6d // indirect
 	github.com/xuri/nfp v0.0.0-20240318013403-ab9948c2c4a7 // indirect
+	github.com/ysmood/fetchup v0.2.3 // indirect
+	github.com/ysmood/goob v0.4.0 // indirect
+	github.com/ysmood/got v0.40.0 // indirect
+	github.com/ysmood/gson v0.7.3 // indirect
+	github.com/ysmood/leakless v0.9.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/arch v0.9.0 // indirect
 	golang.org/x/crypto v0.28.0 // indirect
 	golang.org/x/mod v0.20.0 // indirect
-	golang.org/x/net v0.30.0 // indirect
 	golang.org/x/oauth2 v0.21.0 // indirect
 	golang.org/x/sys v0.26.0 // indirect
 	golang.org/x/tools v0.24.0 // indirect
