@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ai-demo/ip-tool-demo/ip2location"
+	"ai-demo/mcp-go-demo/ip-tool-demo/ip2location"
 	"fmt"
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"

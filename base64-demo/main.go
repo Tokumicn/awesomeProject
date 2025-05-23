@@ -3,11 +3,55 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"os"
 )
 
 func main() {
-	decodeBytesDemo()
-	decodeStringDemo()
+	//decodeBytesDemo()
+	//decodeStringDemo()
+	dir, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("当前目录：", dir)
+
+	// 假设我们要检查的图片文件名是 "image.jpg"
+	imagePath := fmt.Sprintf("%s/1.jpeg", dir)
+
+	// 检查文件是否存在
+	if _, err := os.Stat(imagePath); os.IsNotExist(err) {
+		fmt.Printf("文件 %s 不存在\n", imagePath)
+		return
+	}
+
+	file, err := os.Open(imagePath)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	info, err := file.Stat()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("file size: ", float64(info.Size())/1024)
+
+	// 读取本地文件
+	bytes, err := os.ReadFile(imagePath)
+	if err != nil {
+		fmt.Printf("Error reading file: %v\n", err)
+		return
+	}
+
+	// 将字节切片转换为 base64 编码的字符串
+	base64String := base64.StdEncoding.EncodeToString(bytes)
+
+	fmt.Println(((len(base64String) * 3) / 4) / 1024)
+	fmt.Println(len(base64String) / 1024)
 }
 
 func decodeBytesDemo() {
