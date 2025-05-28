@@ -9,6 +9,8 @@ require (
 	github.com/ThinkInAIXYZ/go-mcp v0.1.6
 	github.com/cloudwego/eino v0.3.27
 	github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250428094815-70b5e0581a33
+	github.com/fatih/color v1.17.0
+	github.com/gosuri/uitable v0.0.4
 	github.com/mark3labs/mcp-go v0.20.0
 	github.com/pgvector/pgvector-go v0.1.1
 	github.com/playwright-community/playwright-go v0.5101.0
@@ -56,6 +58,9 @@ require (
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/ledongthuc/pdf v0.0.0-20220302134840-0c2507a12d80 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.26 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -67,6 +72,7 @@ require (
 	github.com/perimeterx/marshmallow v1.1.4 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkoukk/tiktoken-go v0.1.6 // indirect
+	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rs/dnscache v0.0.0-20230804202142-fc85eb664529 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/slongfield/pyfmt v0.0.0-20220222012616-ea85ff4c361f // indirect
