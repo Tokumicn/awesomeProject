@@ -101,32 +101,6 @@ func writeToExcel(stockInfos []StockInfo) error {
 
 	row := 2 // 从第二行开始写入数据
 	for _, info := range stockInfos {
-		// 读取图片以获取尺寸
-		img, err := readImage(info.ImagePath)
-		if err != nil {
-			fmt.Printf("读取图片失败 %s: %v\n", info.ImageName, err)
-			continue
-		}
-
-		// 获取图片尺寸
-		bounds := img.Bounds()
-		height := bounds.Dy()
-
-		// 插入图片
-		cell := fmt.Sprintf("B%d", row)
-		if err := f.AddPicture("Sheet1", cell, info.ImagePath, &excelize.GraphicOptions{
-			AutoFit: true,
-			ScaleX:  0.5,
-			ScaleY:  0.5,
-		}); err != nil {
-			fmt.Printf("插入图片失败 %s: %v\n", info.ImageName, err)
-			continue
-		}
-
-		// 设置行高以适应图片
-		heightInPoints := float64(height) * 0.75 / 96.0 // 将像素转换为Excel点
-		f.SetRowHeight("Sheet1", row, heightInPoints)
-
 		// 写入其他信息
 		f.SetCellValue("Sheet1", fmt.Sprintf("A%d", row), info.Number)
 		f.SetCellValue("Sheet1", fmt.Sprintf("C%d", row), info.ImageName)
@@ -156,6 +130,16 @@ func writeToExcel(stockInfos []StockInfo) error {
 			f.MergeCell("Sheet1", fmt.Sprintf("A%d", row-len(info.Details)+1), fmt.Sprintf("A%d", row))
 			f.MergeCell("Sheet1", fmt.Sprintf("B%d", row-len(info.Details)+1), fmt.Sprintf("B%d", row))
 			f.MergeCell("Sheet1", fmt.Sprintf("C%d", row-len(info.Details)+1), fmt.Sprintf("C%d", row))
+		}
+
+		// 合并单元格之后再插入图片，这样就可以保证图片自适应单元格大小
+		// 插入图片
+		cell := fmt.Sprintf("B%d", row)
+		if err := f.AddPicture("Sheet1", cell, info.ImagePath, &excelize.GraphicOptions{
+			AutoFit: true,
+		}); err != nil {
+			fmt.Printf("插入图片失败 %s: %v\n", info.ImageName, err)
+			continue
 		}
 
 		row++
