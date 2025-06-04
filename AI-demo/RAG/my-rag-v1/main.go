@@ -2,6 +2,7 @@ package main
 
 import (
 	"ai-demo/RAG/my-rag-v1/ai_model"
+	"ai-demo/RAG/my-rag-v1/tokenizer"
 	"ai-demo/RAG/my-rag-v1/vector_db"
 	"context"
 	"fmt"
@@ -47,23 +48,24 @@ func main() {
 
 	// 查询知识库
 	queries := []string{
-		"鱼钩上不放鱼饵能钓到吗？",
-		"鱼能生吃吗?",
-		"水能燃烧?",
-		"六物是什么?",
-		"什么是分？什么是命？",
+		//"鱼钩上不放鱼饵能钓到吗？",
+		//"鱼能生吃吗?",
+		//"水能燃烧?",
+		//"六物是什么?",
+		//"什么是分？什么是命？",
 		"八卦是什么？",
+		//"八卦",
 	}
 
 	for _, q := range queries {
-		knowledges, err := searchKnowledge(ctx, q)
+		knowledge, err := searchKnowledge(ctx, q)
 		if err != nil {
 			slog.ErrorContext(ctx, "searchKnowledge err: ", err)
 			continue
 		}
 
 		fmt.Println("Q: ", q)
-		for _, k := range knowledges {
+		for _, k := range knowledge {
 			fmt.Println("A: ", k.Content)
 		}
 		fmt.Println("------------------------------")
@@ -71,14 +73,29 @@ func main() {
 }
 
 func searchKnowledge(ctx context.Context, query string) ([]vector_db.DocVector, error) {
-	em, err := ai_model.GetEmbedding(ctx, query)
-	if err != nil {
-		return nil, err
+	// 对问题分词
+
+	splitter := tokenizer.NewSplitter()
+	strings := splitter.Split(tokenizer.None, "", query)
+
+	allDocs := make([]vector_db.DocVector, 0)
+
+	for _, subQ := range strings {
+		em, err := ai_model.GetEmbedding(ctx, subQ)
+		if err != nil {
+			return nil, err
+		}
+
+		docVec := vector_db.DocVector{}
+		similarQuery, err := docVec.SimilarQuery(ctx, pgvector.NewVector(em.Embeddings[0]))
+		if err != nil {
+			return nil, err
+		}
+
+		allDocs = append(allDocs, similarQuery...)
 	}
 
-	docVec := vector_db.DocVector{}
-
-	return docVec.SimilarQuery(ctx, pgvector.NewVector(em.Embeddings[0]))
+	return allDocs, nil
 }
 
 func buildKnowledge(ctx context.Context) error {
