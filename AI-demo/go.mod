@@ -9,9 +9,9 @@ require (
 	github.com/ThinkInAIXYZ/go-mcp v0.1.6
 	github.com/cloudwego/eino v0.3.27
 	github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250428094815-70b5e0581a33
-	github.com/fatih/color v1.17.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/mark3labs/mcp-go v0.20.0
+	github.com/meilisearch/meilisearch-go v0.32.0
 	github.com/pgvector/pgvector-go v0.1.1
 	github.com/playwright-community/playwright-go v0.5101.0
 	github.com/tmc/langchaingo v0.1.13
@@ -26,6 +26,7 @@ require (
 require (
 	github.com/AssemblyAI/assemblyai-go-sdk v1.3.0 // indirect
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect
+	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/andybalholm/cascadia v1.3.2 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/bytedance/sonic v1.13.2 // indirect
@@ -35,11 +36,13 @@ require (
 	github.com/deckarep/golang-set/v2 v2.8.0 // indirect
 	github.com/dlclark/regexp2 v1.11.4 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
+	github.com/fatih/color v1.17.0 // indirect
 	github.com/getkin/kin-openapi v0.118.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.4 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
 	github.com/go-openapi/swag v0.22.4 // indirect
 	github.com/go-stack/stack v1.8.1 // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.1 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/goph/emperror v0.17.2 // indirect
@@ -57,7 +60,7 @@ require (
 	github.com/klauspost/compress v1.17.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/ledongthuc/pdf v0.0.0-20220302134840-0c2507a12d80 // indirect
-	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/mailru/easyjson v0.9.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect

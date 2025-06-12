@@ -3,6 +3,7 @@ package main
 import (
 	"ai-demo/RAG/my-rag-v1/ai_model"
 	"ai-demo/RAG/my-rag-v1/tokenizer"
+	"ai-demo/RAG/my-rag-v1/tokenizer/jieba_spliter"
 	"ai-demo/RAG/my-rag-v1/vector_db"
 	"context"
 	"fmt"
@@ -75,8 +76,13 @@ func main() {
 func searchKnowledge(ctx context.Context, query string) ([]vector_db.DocVector, error) {
 	// 对问题分词
 
-	splitter := tokenizer.NewSplitter()
-	strings := splitter.Split(tokenizer.None, "", query)
+	splitter := tokenizer.NewSplitter(tokenizer.Options{
+		ChunkSize:    256,
+		ChunkOverlap: 25,
+		CutType:      jieba_spliter.CutModeAccurate,
+		SplitterType: tokenizer.LangChain,
+	})
+	strings := splitter.Split(query)
 
 	allDocs := make([]vector_db.DocVector, 0)
 
