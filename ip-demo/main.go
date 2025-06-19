@@ -4,9 +4,16 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"sync"
 )
 
 func main() {
+
+	var once sync.Once
+	once.Do(func() {
+		fmt.Println("hello world")
+	})
+
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		fmt.Println(err)

@@ -71,6 +71,9 @@ func main() {
 		return
 	}
 
-	fmt.Println(users)
+	db.Callback().Row().Before("gorm:row").Register("before_row", func(db *gorm.DB) {
+		fmt.Println("Before row callback")
+	})
 
+	fmt.Println(users)
 }
