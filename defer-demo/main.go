@@ -1,13 +1,54 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"time"
 )
 
 func main() {
-	method1()
-	method2()
+	//method1()
+	//method2()
+
+	ctx := context.WithValue(context.Background(), "YY", "YYValue")
+
+	go func() {
+		go goFunc(ctx)
+	}()
+	go func() {
+		go goFunc2(ctx)
+	}()
+	go func() {
+		go goFunc3(ctx)
+	}()
+
+	time.Sleep(time.Second * 3)
+}
+
+func getYY(ctx context.Context) string {
+	return ctx.Value("YY").(string)
+}
+
+func goFunc(ctx context.Context) {
+	go func() {
+		go func() {
+			fmt.Println("1 goroutine getYY:", getYY(ctx))
+		}()
+	}()
+}
+
+func goFunc2(ctx context.Context) {
+	go func() {
+		go func() {
+			go goFunc(ctx)
+		}()
+	}()
+}
+
+func goFunc3(ctx context.Context) {
+	go func() {
+		go goFunc2(ctx)
+	}()
 }
 
 func method1() {
