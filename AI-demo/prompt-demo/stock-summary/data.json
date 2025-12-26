@@ -1,0 +1,8 @@
+{
+  "query": "近期涨幅前五的股票或成交额度最高的主题指数",
+  "subAnswerData": [{
+    "sub_query": "成交额最高的股票",
+    "conditions": ["成交额排名靠前"],
+    "structured_data": [""]
+  }]
+}

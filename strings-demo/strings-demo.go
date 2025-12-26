@@ -93,6 +93,9 @@ func main() {
 	trim := strings.Trim(" 123 456 ", " ")
 	fmt.Println(trim)
 
+	replaceAll := strings.ReplaceAll(str, "通达信", "")
+	fmt.Println(replaceAll)
+
 	//userEmail := "username@qq.com"
 	//
 	//before, after, found := strings.Cut(userEmail, "@")
