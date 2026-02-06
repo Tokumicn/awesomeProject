@@ -34,16 +34,12 @@ func GetRawSlot(parameters []Slot) []Slot {
 	return output
 }
 
-func UpdateSlot(newValues []map[string]interface{}, targetSlots []Slot) {
-	for _, item := range newValues {
-		if name, ok := item["name"].(string); ok {
-			if value, ok := item["value"].(string); ok && value != "" {
-				for i := range targetSlots {
-					if targetSlots[i].Name == name {
-						targetSlots[i].Value = value
-						break
-					}
-				}
+func UpdateSlot(newValues map[string]interface{}, targetSlots []Slot) {
+	for name, val := range newValues {
+		for i := range targetSlots {
+			if targetSlots[i].Name == name {
+				targetSlots[i].Value = val.(string)
+				break
 			}
 		}
 	}

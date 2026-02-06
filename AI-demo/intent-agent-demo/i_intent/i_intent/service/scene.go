@@ -70,13 +70,7 @@ func (cp *CommonProcessor) Process(ctx context.Context, userInput string, chatHi
 
 	currentValues := utils.ExtractJSONFromString(newInfoJSONRaw)
 	if len(currentValues) > 0 {
-		if _, ok := currentValues[0]["name"]; !ok {
-			newValues := make([]map[string]interface{}, 0)
-			newValues = append(newValues, currentValues[0])
-			models.UpdateSlot(newValues, cp.slot)
-		} else {
-			models.UpdateSlot(currentValues, cp.slot)
-		}
+		models.UpdateSlot(currentValues, cp.slot)
 	}
 
 	g.Log().Printf(ctx, "slot update before: %v", cp.slot)

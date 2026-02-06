@@ -25,21 +25,14 @@ func ExtractFloat(input string) float64 {
 	return 0
 }
 
-func ExtractJSONFromString(input string) []map[string]interface{} {
-	re := regexp.MustCompile(`\{.*?\}`)
-	matches := re.FindAllString(input, -1)
+func ExtractJSONFromString(input string) map[string]interface{} {
+	//re := regexp.MustCompile(`\{.*?\}`)
+	//matches := re.FindAllString(input, -1)
 
-	var validJSONs []map[string]interface{}
-	for _, match := range matches {
-		var jsonObj map[string]interface{}
-		if err := json.Unmarshal([]byte(match), &jsonObj); err == nil {
-			validJSONs = append(validJSONs, jsonObj)
-		} else {
-			fixed := FixJSON(match)
-			if fixed != nil {
-				validJSONs = append(validJSONs, fixed)
-			}
-		}
+	var validJSONs map[string]interface{}
+	err := json.Unmarshal([]byte(input), &validJSONs)
+	if err != nil {
+		return nil
 	}
 
 	return validJSONs
