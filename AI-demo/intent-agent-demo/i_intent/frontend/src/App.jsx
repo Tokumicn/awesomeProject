@@ -73,7 +73,7 @@ export default function App() {
       <Header className="main-header">
         <div className="header-logo">
           <CustomerServiceOutlined style={{ fontSize: 28, color: '#3b82f6' }} />
-          <span className="header-title">电信业务AI问答系统</span>
+          <span className="header-title">业务AI问答系统</span>
         </div>
         <Space className="header-actions">
           <Button 

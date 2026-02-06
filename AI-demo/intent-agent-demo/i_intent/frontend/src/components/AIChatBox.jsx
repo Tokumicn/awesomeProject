@@ -6,7 +6,7 @@ import { streamLLMChat, generateSessionId, resetSession } from '../api/aiApi';
 const { Text } = Typography;
 const { TextArea } = Input;
 
-const WELCOME_MSG = '您好！我是中国电信客服助手小天，很高兴为您服务。您可以咨询流量查询、宽带报修、套餐变更、副卡申请等业务，也可以与我闲聊。';
+const WELCOME_MSG = '您好！我是花果山电信客服助手小空，很高兴为您服务。您可以咨询流量查询、宽带报修、套餐变更、副卡申请等业务，也可以与我闲聊。';
 
 export default function AIChatBox({ chat, updateChat }) {
   const [input, setInput] = useState('');
