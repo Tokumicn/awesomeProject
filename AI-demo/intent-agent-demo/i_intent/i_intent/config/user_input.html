@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能问答对话框</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #chat-container {
+            width: 50%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        #fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        #fullscreen-btn:hover {
+            background-color: #0056b3;
+        }
+        #chat-output {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #e9e9e9;
+        }
+        #input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 7px 0 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .fullscreen {
+            width: 100vw;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            border-radius: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .fullscreen #chat-output {
+            height: calc(100% - 60px);
+        }
+        #mic-btn {
+            background-color: #28a745;
+            margin-left: 10px;
+        }
+        #mic-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <button id="fullscreen-btn">全屏</button>
+        <div id="chat-output"></div>
+        <div id="input-container">
+            <input type="text" id="chat-input" placeholder="输入问题..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">发送</button>
+            <button id="mic-btn" onclick="toggleMic()">🎤</button>
+        </div>
+    </div>
+
+    <script>
+        var socket;
+        var mediaRecorder;
+        var recognizing = false;
+
+        function setupWebSocket() {
+            socket = new WebSocket('ws://10.21.8.6:43007');
+
+            socket.onopen = function(event) {
+                console.log('WebSocket connection established');
+            };
+
+            socket.onmessage = function(event) {
+                var chatOutput = document.getElementById('chat-output');
+                chatOutput.innerHTML += '<div>回答: ' + event.data + '</div>';
+                chatOutput.scrollTop = chatOutput.scrollHeight; // 滚动到底部
+            };
+
+            socket.onclose = function(event) {
+                console.log('WebSocket connection closed');
+            };
+
+            socket.onerror = function(error) {
+                console.error('WebSocket error:', error);
+            };
+        }
+
+        function toggleMic() {
+            if (recognizing) {
+                stopRecording();
+            } else {
+                startRecording();
+            }
+        }
+
+        function startRecording() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    setupWebSocket();
+
+                    mediaRecorder = new MediaRecorder(stream, {
+                        mimeType: 'audio/webm'
+                    });
+
+                    mediaRecorder.ondataavailable = function(event) {
+                        if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
+                            socket.send(event.data);
+                        }
+                    };
+
+                    mediaRecorder.start(100); // Send audio data in chunks of 100ms
+
+                    recognizing = true;
+                    document.getElementById('mic-btn').style.backgroundColor = '#dc3545';
+                })
+                .catch(function(err) {
+                    console.error('Error accessing microphone:', err);
+                });
+        }
+
+        function stopRecording() {
+            if (mediaRecorder) {
+                mediaRecorder.stop();
+            }
+            if (socket) {
+                socket.close();
+            }
+            recognizing = false;
+            document.getElementById('mic-btn').style.backgroundColor = '#28a745';
+        }
+
+        function sendMessage() {
+            var input = document.getElementById('chat-input');
+            var message = input.value;
+            input.value = '';
+
+            // 显示用户输入的问题
+            var chatOutput = document.getElementById('chat-output');
+            chatOutput.innerHTML += '<div>你: ' + message + '</div>';
+
+            // 发送请求到 Flask API
+            fetch('http://127.0.0.1:5000/multi_question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ question: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 显示返回的答案
+                chatOutput.innerHTML += '<div>回答: ' + data.answer + '</div>';
+                chatOutput.scrollTop = chatOutput.scrollHeight; // 滚动到底部
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        var fullScreenBtn = document.getElementById('fullscreen-btn');
+        var chatContainer = document.getElementById('chat-container');
+
+        fullScreenBtn.addEventListener('click', function() {
+            if (chatContainer.classList.contains('fullscreen')) {
+                chatContainer.classList.remove('fullscreen');
+                fullScreenBtn.textContent = '全屏';
+            } else {
+                chatContainer.classList.add('fullscreen');
+                fullScreenBtn.textContent = '还原';
+            }
+        });
+    </script>
+</body>
+</html>
