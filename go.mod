@@ -6,6 +6,7 @@ toolchain go1.23.0
 
 require (
 	github.com/PuerkitoBio/goquery v1.5.1
+	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de
 	github.com/bits-and-blooms/bloom/v3 v3.7.0
 	github.com/chromedp/chromedp v0.9.2
 	github.com/coder/websocket v1.8.12
@@ -19,7 +20,6 @@ require (
 	github.com/google/wire v0.6.0
 	github.com/gorilla/pat v1.0.2
 	github.com/jinzhu/gorm v1.9.16
-	github.com/jinzhu/now v1.1.5
 	github.com/levigross/grequests v0.0.0-20231203190023-9c307ef1f48d
 	github.com/markbates/goth v1.80.0
 	github.com/mattn/go-sqlite3 v1.14.22
@@ -29,6 +29,7 @@ require (
 	github.com/prometheus/client_golang v1.20.3
 	github.com/rpcx-ecosystem/rpcx-examples3 v1.1.6
 	github.com/sagikazarmark/slog-shim v0.1.0
+	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
 	github.com/shirou/gopsutil/v3 v3.20.10
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/smallnest/rpcx v1.8.31
@@ -58,7 +59,6 @@ require (
 	github.com/antchfx/xmlquery v1.2.4 // indirect
 	github.com/antchfx/xpath v1.1.8 // indirect
 	github.com/apache/thrift v0.20.0 // indirect
-	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.10.0 // indirect
 	github.com/bytedance/sonic v1.13.2 // indirect
@@ -109,6 +109,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jamiealquiza/tachymeter v2.0.0+incompatible // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/juju/ratelimit v1.0.2 // indirect
